@@ -1,0 +1,94 @@
+/* rubik-300 - latin */
+@font-face {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    url("./../fonts/rubik/rubik-v20-latin-ext_latin-300.woff2") format("woff2"),
+    url("./../fonts/rubik/rubik-v20-latin-ext_latin-300.woff") format("woff");
+}
+
+/* roboto-mono-300 - latin */
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    url("./../fonts/roboto-mono/roboto-mono-v13-latin-300.woff2") format("woff2"),
+    url("./../fonts/roboto-mono/roboto-mono-v13-latin-300.woff") format("woff");
+}
+
+/** Use Rubik for "." and "," instead of Roboto Mono. */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    url("./../fonts/rubik/rubik-v20-latin-ext_latin-300.woff2") format("woff2"),
+    url("./../fonts/rubik/rubik-v20-latin-ext_latin-300.woff") format("woff");
+  unicode-range: U+002E, U+002C;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+html {
+  cursor: initial;
+  letter-spacing: 0.05em;
+}
+
+/* Trigger font to load earlier */
+body:before {
+  content: '';
+  font-family: Rubik, sans-serif;
+}
+
+* {
+  transition: border 200ms linear, background-color 200ms linear;
+}
+
+.logotype-big {
+  max-width: 240px;
+  max-height: 40px;
+}
+
+.logotype-small {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+/*
+ * Grommet and ResponsiveLayer do not handle nesting layers well:
+ * If user opens settings, clicks manage account (nested layer), and cancels:
+ * settings modal is still open, but `overflow: hidden` is removed from body.
+ * Workaround: set overflow hidden when any responsive layer exists.
+ */
+body:has(.fix-responsive-layer) {
+  overflow: hidden;
+}
+/*
+ * In chrome extension popup: `overflow: hidden` does not work on document.body,
+ * so main scrollbar is still displayed after modal tries to hide it. Workaround:
+ * change scrollbar width to 0 when any responsive layer exists.
+ */
+body:has(.fix-responsive-layer)::-webkit-scrollbar {
+  display: none;
+}
+
+/* Visually warn developers about sensitive input fields missing preventSavingInputsToUserData */
+:is(input, textarea):is(
+[type="password"], [name="password"], [name="privatekey"], [name="mnemonic"], #privatekey, #mnemonic
+):not([autocomplete="off"]),
+/* Parent form should have preventSavingInputsToUserData too */
+form:not([autocomplete="off"]) :is(input, textarea):is(
+[type="password"], [name="password"], [name="privatekey"], [name="mnemonic"], #privatekey, #mnemonic
+) {
+  background: rgb(255 0 0) !important;
+  border: 1px solid rgb(255 0 0) !important;
+  content: "Use preventSavingInputsToUserData on sensitive inputs and parent form";
+}
