@@ -1,0 +1,14 @@
+{
+  "name": "@oasisprotocol/rose-wallet-playwright-test",
+  "version": "0.0.0-development",
+  "private": true,
+  "scripts": {
+    "test": "playwright test --project main",
+    "test:prod": "BASE_URL=http://localhost:5000 EXTENSION_PATH=../build-ext/  playwright test --project main",
+    "test:screenshots": "playwright test --project screenshots"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.46.1",
+    "serve-handler": "6.1.6"
+  }
+}

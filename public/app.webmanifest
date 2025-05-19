@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "short_name": "ROSE Wallet",
+  "name": "The official non-custodial web wallet for the Oasis Network.",
+  "icons": [
+    {
+      "src": "https://assets.oasis.io/logotypes/favicon.svg",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./Icon Blue 192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./Icon Blue 512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

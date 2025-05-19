@@ -1,0 +1,60 @@
+import { test, expect } from '@playwright/test'
+import { privateKey, privateKeyAddress } from '../../src/utils/__fixtures__/test-inputs'
+import { fillPrivateKeyWithoutPassword } from '../utils/fillPrivateKey'
+import { warnSlowApi } from '../utils/warnSlowApi'
+import { mockApi } from '../utils/mockApi'
+
+test.beforeEach(async ({ page }) => {
+  await warnSlowApi(page)
+  await mockApi(page, '123000000000')
+
+  await page.goto('/open-wallet/private-key')
+  await fillPrivateKeyWithoutPassword(page, {
+    privateKey: privateKey,
+    privateKeyAddress: privateKeyAddress,
+    persistenceCheckboxDisabled: false,
+  })
+  await expect(page.getByTestId('account-selector')).toBeVisible()
+})
+
+test('Account selector should refresh balances on network change', async ({ page }) => {
+  await page.getByRole('link', { name: /Home/ }).click()
+
+  await page.getByTestId('account-selector').click()
+  await expect(page.getByTestId('account-choice')).toContainText('123.0')
+  await page.getByRole('button', { name: /Select/ }).click()
+
+  await mockApi(page, '456000000000')
+  await page.getByTestId('network-selector').click()
+  await page.getByRole('menuitem', { name: 'Testnet' }).click()
+  await page.getByTestId('account-selector').click()
+  await expect(page.getByTestId('account-choice')).toContainText('456.0')
+  await page.getByRole('button', { name: /Select/ }).click()
+})
+
+test('Accounts page should continuously refresh balance', async ({ page }) => {
+  test.setTimeout(120_000)
+  await page.getByTestId('account-selector').click()
+  await expect(page.getByTestId('account-balance-summary')).toContainText('123.0')
+  await expect(page.getByTestId('account-choice')).toContainText('123.0')
+  await mockApi(page, '456000000000')
+  await page.waitForRequest('**/consensus/accounts/*', { timeout: 60_000 })
+  await page.waitForRequest('**/consensus/transactions?*', { timeout: 60_000 })
+  await expect(page.getByTestId('account-balance-summary')).toContainText('456.0')
+  await expect(page.getByTestId('account-choice')).toContainText('456.0')
+  // If balance in AccountSelector is not refreshed then making transactions with new balance will fail.
+})
+
+test('Accounts page should refresh balance on navigation', async ({ page }) => {
+  await page.getByTestId('account-selector').click()
+  await expect(page.getByTestId('account-balance-summary')).toContainText('123.0')
+  await expect(page.getByTestId('account-choice')).toContainText('123.0')
+  await page.getByRole('button', { name: /Select/ }).click()
+  await page.getByRole('link', { name: /Home/ }).click()
+  await mockApi(page, '456000000000')
+  await page.getByTestId('nav-myaccount').click()
+  await page.getByTestId('account-selector').click()
+  await expect(page.getByTestId('account-balance-summary')).toContainText('456.0')
+  await expect(page.getByTestId('account-choice')).toContainText('456.0')
+  // If balance in AccountSelector is not refreshed then making transactions with new balance will fail.
+})
