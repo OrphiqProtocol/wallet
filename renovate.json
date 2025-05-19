@@ -1,0 +1,40 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":disableDependencyDashboard"],
+  "packageRules": [
+    {
+      "groupName": "lint dependencies",
+      "matchPackagePatterns": ["eslint", "prettier"]
+    },
+    {
+      "groupName": "test dependencies",
+      "matchPackagePatterns": ["jest", "testing-library"]
+    },
+    {
+      "groupName": "react dependencies",
+      "matchPackagePatterns": ["react"]
+    },
+    {
+      "groupName": "redux dependencies",
+      "matchPackagePatterns": ["redux"]
+    },
+    {
+      "groupName": "i18n dependencies",
+      "matchPackagePatterns": ["i18n"]
+    },
+    {
+      "groupName": "TypeScript type definitions",
+      "matchPackagePatterns": ["@types/"]
+    },
+    {
+      "groupName": "CI github-actions",
+      "matchManagers": ["github-actions"]
+    },
+    {
+      "description": "Packages needed for migration from V0 extension should stay at the pinned version (https://github.com/oasisprotocol/oasis-wallet-ext/blob/master/package.json#L14)",
+      "matchPackageNames": ["@metamask/browser-passworder"],
+      "enabled": false
+    }
+  ],
+  "rangeStrategy": "bump"
+}

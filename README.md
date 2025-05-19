@@ -17,16 +17,16 @@
 
 - Production browser extension: [chromewebstore.google.com]
 
-- Production / Stable deploy: <https://wallet.Orphiq.io>
+- Production / Stable deploy: <https://wallet.oasis.io>
 
   The main deploy of the wallet available to the general public.
 
-- Staging deploy: <https://wallet.stg.Orphiq.io>
+- Staging deploy: <https://wallet.stg.oasis.io>
 
   A deploy of the latest released version of the wallet available for users
   wanting to try out and test the latest version.
 
-- Development deploy: <https://wallet.dev.Orphiq.io>
+- Development deploy: <https://wallet.dev.oasis.io>
 
   A deploy of the latest code in the `master` branch available for power users
   and developers to try out the latest (unreleased) version.
@@ -75,26 +75,26 @@ accounts already having tokens.
 ```none
 Using a private key:
 X0jlpvskP1q8E6rHxWRJr7yTvpCuOPEKBGW8gtuVTxfnViTI0s2fBizgMxNzo75Q7w7MxdJXtOLeqDoFUGxxMg==
-Orphiq1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk
+oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk
 
 Using a mnemonic:
 abuse gown claw final toddler wedding sister parade useful typical spatial skate
 decrease bulk student manual cloth shove fat car little swamp tag ginger
-Orphiq1qq5t7f2gecsjsdxmp5zxtwgck6pzpjmkvc657z6l
+oasis1qq5t7f2gecsjsdxmp5zxtwgck6pzpjmkvc657z6l
 ```
 
 ## Architecture
 
 ![Architecture diagram](docs/images/architecture.svg)
 
-- [envoy-proxy], used as a gRPC gateway for live access to the Orphiq-node, to
+- [envoy-proxy], used as a gRPC gateway for live access to the oasis-node, to
   fetch live balance, information about the current state of the network, and to
   submit transactions.
-- [Orphiq-nexus], is the official indexer for the Orphiq Network, providing
-the backend for the Orphiq Explorer and ROSE Wallet.
-It exposes an [API][Orphiq-nexus-api-spec].
+- [oasis-nexus], is the official indexer for the Oasis Network, providing
+the backend for the Oasis Explorer and ROSE Wallet.
+It exposes an [API][oasis-nexus-api-spec].
 
-- [Orphiq-scan], Orphiq blockchain explorer that enables view of historical data
+- [oasis-scan], oasis blockchain explorer that enables view of historical data
   about transactions, accounts, validators, paratimes, blocks, proposals and
   more. It exposes an [API][scan-api-repo].
 
@@ -130,7 +130,7 @@ yarn start
 # Manually check that content-security-policy in getSecurityHeaders.js doesn't
 # break any functionality
 yarn start:prod
-# Open http://localhost:5000/account/Orphiq1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe/stake
+# Open http://localhost:5000/account/oasis1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe/stake
 # and switch to testnet. This exercises at least: fonts, grpc, testnet grpc, API,
 # and validator logos.
 
@@ -199,36 +199,36 @@ Adding a new language:
 
 [Release process doc](docs/release-process.md)
 
-[demo-video]: https://github.com/Orphiqprotocol/wallet/assets/3758846/ef11fbea-dd55-42b1-87a4-1b74509a2809
+[demo-video]: https://github.com/oasisprotocol/wallet/assets/3758846/ef11fbea-dd55-42b1-87a4-1b74509a2809
 [chromewebstore.google.com]: https://chromewebstore.google.com/detail/rose-wallet/ppdadbejkmjnefldpcdjhnkpbjkikoip
 [envoy-proxy]: https://www.envoyproxy.io
-[Orphiq-nexus]: https://github.com/Orphiqprotocol/nexus
-[Orphiq-nexus-api-spec]: https://nexus.Orphiq.io/v1/spec/v1.html
-[Orphiq-scan]: https://www.Orphiqscan.com
-[scan-api-repo]: https://github.com/bitcat365/Orphiqscan-backend#Orphiqscan-api
+[oasis-nexus]: https://github.com/oasisprotocol/nexus
+[oasis-nexus-api-spec]: https://nexus.oasis.io/v1/spec/v1.html
+[oasis-scan]: https://www.oasisscan.com
+[scan-api-repo]: https://github.com/bitcat365/oasisscan-backend#oasisscan-api
 [Jest]: https://github.com/facebook/jest
 [prettier]: https://prettier.io/
 [eslint]: https://github.com/eslint/eslint
 [How To Write a Git Commit Message]: https://chris.beams.io/posts/git-commit/
-[Transifex]: https://www.transifex.com/Orphiqprotocol/Orphiq-wallet-web/
+[Transifex]: https://www.transifex.com/oasisprotocol/oasis-wallet-web/
 [react-i18next]: https://react.i18next.com/
 [useTranslation hook]: https://react.i18next.com/latest/usetranslation-hook
 [English translation.json]: src/locales/en/translation.json
 [i18n.ts]: src/locales/i18n.ts
-[github-ci-build-badge]: https://github.com/Orphiqprotocol/wallet/actions/workflows/ci-build.yml/badge.svg
-[github-ci-build-link]: https://github.com/Orphiqprotocol/wallet/actions?query=workflow:ci-build+branch:master
-[github-ci-test-badge]: https://github.com/Orphiqprotocol/wallet/actions/workflows/ci-test.yml/badge.svg
-[github-ci-test-link]: https://github.com/Orphiqprotocol/wallet/actions?query=workflow:ci-test+branch:master
-[github-ci-lint-badge]: https://github.com/Orphiqprotocol/wallet/actions/workflows/ci-lint.yml/badge.svg
-[github-ci-lint-link]: https://github.com/Orphiqprotocol/wallet/actions?query=workflow:ci-lint+branch:master
-[github-release-badge]: https://github.com/Orphiqprotocol/wallet/actions/workflows/release.yml/badge.svg
-[github-release-link]: https://github.com/Orphiqprotocol/wallet/actions?query=workflow:release
+[github-ci-build-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/ci-build.yml/badge.svg
+[github-ci-build-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:ci-build+branch:master
+[github-ci-test-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/ci-test.yml/badge.svg
+[github-ci-test-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:ci-test+branch:master
+[github-ci-lint-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/ci-lint.yml/badge.svg
+[github-ci-lint-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:ci-lint+branch:master
+[github-release-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/release.yml/badge.svg
+[github-release-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:release
 [github-renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
 [github-renovate-link]: https://www.mend.io/renovate/
 [license-badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
 [license-link]: https://opensource.org/licenses/Apache-2.0
-[codecov-badge]: https://codecov.io/gh/Orphiqprotocol/Orphiq-wallet-web/branch/master/graph/badge.svg
-[codecov-link]: https://codecov.io/gh/Orphiqprotocol/Orphiq-wallet-web
+[codecov-badge]: https://codecov.io/gh/oasisprotocol/oasis-wallet-web/branch/master/graph/badge.svg
+[codecov-link]: https://codecov.io/gh/oasisprotocol/oasis-wallet-web
 [BIP-0039]: https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 [Ledger]: https://ledger.com/
 [Transak On-Ramp]: https://transak.com/
